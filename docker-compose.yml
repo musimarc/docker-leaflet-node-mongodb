@@ -1,0 +1,9 @@
+mongo-leaflet:
+  image: mongo
+  ports:
+    - "27017:27017"
+
+mongo-seed:
+  build: ./mongo-seed
+  links:
+    - mongo-leaflet

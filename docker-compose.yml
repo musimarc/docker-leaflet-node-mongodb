@@ -1,9 +1,20 @@
-mongo-leaflet:
-  image: mongo
-  ports:
-    - "27017:27017"
+version : '2'
+services:
+  mongo-leaflet:
+    image: mongo
+    ports:
+      - "27017:27017"
 
-mongo-seed:
-  build: ./mongo-seed
-  links:
-    - mongo-leaflet
+#  mongo-seed:
+#    build: ./mongo-seed
+#    depends_on:
+#      - mongo-leaflet
+
+  web:
+    build: ./node
+    depends_on:
+      - mongo-leaflet
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src/leaflet_map:/appli
